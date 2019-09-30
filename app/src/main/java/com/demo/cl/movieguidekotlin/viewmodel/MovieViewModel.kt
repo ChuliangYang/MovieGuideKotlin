@@ -1,5 +1,6 @@
 package com.demo.cl.movieguidekotlin.viewmodel
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,6 +14,10 @@ import com.demo.cl.movieguidekotlin.repos.MovieRepository
 class MovieViewModel(val repo:MovieRepository):ViewModel() {
     val moviePageList:MediatorLiveData<PagedList<Movie>> = MediatorLiveData()
 
+    val showProgress:MutableLiveData<Int> = MutableLiveData(View.VISIBLE)
+
+    val currentCategory=MutableLiveData<Category>(Category.POPULAR)
+
     private var currentMoviePage:LiveData<PagedList<Movie>>?=null
 
     fun getMovieList(category: Category){
@@ -22,8 +27,10 @@ class MovieViewModel(val repo:MovieRepository):ViewModel() {
         currentMoviePage=repo.getMoviePageList(category)
         moviePageList.addSource(currentMoviePage!!) {
             moviePageList.postValue(it)
+            currentCategory.postValue(category)
         }
     }
+
 
 
     override fun onCleared() {

@@ -10,6 +10,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
+        android:layout_margin="5dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="4dp"
         app:cardElevation="6dp">
@@ -20,9 +21,9 @@
 
             <ImageView
                 android:id="@+id/iv_post"
+                image_url="@{movie.poster_path}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                image_url="@{movie.poster_path}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

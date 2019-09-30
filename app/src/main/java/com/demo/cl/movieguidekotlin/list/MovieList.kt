@@ -10,6 +10,7 @@ import com.demo.cl.movieguidekotlin.data.Movie
 import com.demo.cl.movieguidekotlin.data.MovieResponse
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 class MovieListDataSource(val movieApi: MovieApi,val category:Category):PageKeyedDataSource<Int,Movie>(){
 
@@ -28,7 +29,7 @@ class MovieListDataSource(val movieApi: MovieApi,val category:Category):PageKeye
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
-        movieApi.getMovieList(category.value,API_KEY,params.key).subscribeOn(Schedulers.io()).subscribeBy (onNext = {response->
+        movieApi.getMovieList(category.value,API_KEY,params.key).subscribeOn(Schedulers.io()).subscribeBy (onNext = { response->
             response.results?.let {
                 callback.onResult(it,params.key+1)
             }

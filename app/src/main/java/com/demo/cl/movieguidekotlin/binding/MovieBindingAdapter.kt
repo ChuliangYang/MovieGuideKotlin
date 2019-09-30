@@ -1,7 +1,9 @@
 package com.demo.cl.movieguidekotlin.binding
 
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.demo.cl.movieguidekotlin.api.PICTURE_BASE_URL
 
@@ -11,4 +13,14 @@ fun setImageURL(iv: ImageView, url: String) {
 }
 
 
+@BindingAdapter("refresh")
+fun setRefresh(sf:SwipeRefreshLayout,refreshListener: OnSwipeRefreshListener){
+    sf.setOnRefreshListener {
+        refreshListener.swipeToRefresh(sf)
+        sf.isRefreshing=false
+    }
+}
 
+interface OnSwipeRefreshListener{
+     fun swipeToRefresh(view: View)
+}
