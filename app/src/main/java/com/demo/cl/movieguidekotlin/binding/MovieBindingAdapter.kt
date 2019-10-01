@@ -8,8 +8,10 @@ import com.bumptech.glide.Glide
 import com.demo.cl.movieguidekotlin.api.PICTURE_BASE_URL
 
 @BindingAdapter("image_url")
-fun setImageURL(iv: ImageView, url: String) {
-    Glide.with(iv).load(PICTURE_BASE_URL+url).into(iv)
+fun setImageURL(iv: ImageView, url: String?) {
+    url?.let {
+        Glide.with(iv).load(PICTURE_BASE_URL+it).into(iv)
+    }
 }
 
 

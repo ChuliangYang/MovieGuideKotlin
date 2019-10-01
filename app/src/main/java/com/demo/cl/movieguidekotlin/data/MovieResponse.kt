@@ -1,5 +1,8 @@
 package com.demo.cl.movieguidekotlin.data
 
+import androidx.room.*
+import com.google.gson.annotations.Expose
+
 data class MovieResponse(
     val page: Int?,
     val results: List<Movie>?,
@@ -7,11 +10,11 @@ data class MovieResponse(
     val total_results: Int?
 )
 
-data class Movie(
+@Entity(tableName = "Movie", indices = [Index("category"),Index("favorite")])
+data class Movie constructor(
     val adult: Boolean?,
     val backdrop_path: String?,
-    val genre_ids: List<Int?>?,
-    val id: Int?,
+    val id: Int,
     val original_language: String?,
     val original_title: String?,
     val overview: String?,
@@ -21,7 +24,20 @@ data class Movie(
     val title: String?,
     val video: Boolean?,
     val vote_average: Double?,
-    val vote_count: Int?
-)
+    val vote_count: Int?,
+    @Expose(serialize = false, deserialize = false)
+    var category:String?,
+    @Expose(serialize = false, deserialize = false)
+    val favorite:Boolean=false
+){
+    @Ignore
+    var genre_ids: List<Int?>?=null
+    @Expose(serialize = false, deserialize = false)
+    var indexInResponse: Int = -1
+
+    @PrimaryKey(autoGenerate = true)
+    @Expose(serialize = false, deserialize = false)
+    var primaryId=0
+}
 
 

@@ -12,6 +12,7 @@ import com.demo.cl.movieguidekotlin.R
 import com.demo.cl.movieguidekotlin.ViewModelFactory
 import com.demo.cl.movieguidekotlin.api.Category
 import com.demo.cl.movieguidekotlin.binding.OnSwipeRefreshListener
+import com.demo.cl.movieguidekotlin.data.MovieDatabase
 import com.demo.cl.movieguidekotlin.databinding.FramgentMoviesBinding
 import com.demo.cl.movieguidekotlin.list.adapter.MoviePageListAdapter
 import com.demo.cl.movieguidekotlin.viewmodel.MovieViewModel
@@ -37,7 +38,7 @@ class MovieFragment : Fragment() {
             false
         ).apply {
             activity?.let {
-                viewmodel = ViewModelProviders.of(it, ViewModelFactory.getInstance())
+                viewmodel = ViewModelProviders.of(it, ViewModelFactory.getInstance(it.applicationContext))
                     .get(MovieViewModel::class.java)
             }
             swipRefresh = object : OnSwipeRefreshListener {
