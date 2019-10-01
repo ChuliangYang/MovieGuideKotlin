@@ -43,7 +43,7 @@ class MovieFragment : Fragment() {
             }
             swipRefresh = object : OnSwipeRefreshListener {
                 override fun swipeToRefresh(view: View) {
-                    viewmodel.getMovieList(viewmodel.currentCategory.value!!)
+//                    viewmodel.getMovieList(viewmodel.currentCategory.value!!)
                 }
             }
         }.root

@@ -12,7 +12,7 @@ import com.demo.cl.movieguidekotlin.list.MovieSourceBoundaryCallback
 
 class MovieRepository(val movieApi: MovieApi, val movieDao: MovieDao) {
     fun getMoviePageList(category: Category):LiveData<PagedList<Movie>>{
-        return LivePagedListBuilder(movieDao.getMovieList(category.value),PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(20).build()).setBoundaryCallback(
+        return LivePagedListBuilder(movieDao.getMovieList(category.value),PagedList.Config.Builder().setEnablePlaceholders(false).setInitialLoadSizeHint(20).setPageSize(20).build()).setBoundaryCallback(
             MovieSourceBoundaryCallback(movieApi,movieDao,category)
         ).build()
     }

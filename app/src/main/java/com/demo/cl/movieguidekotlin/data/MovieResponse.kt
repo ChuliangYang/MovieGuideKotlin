@@ -10,7 +10,7 @@ data class MovieResponse(
     val total_results: Int?
 )
 
-@Entity(tableName = "Movie", indices = [Index("category"),Index("favorite")])
+@Entity(tableName = "Movie", indices = [Index("category"),Index("favorite"), Index("indexInResponse")])
 data class Movie constructor(
     val adult: Boolean?,
     val backdrop_path: String?,
@@ -34,6 +34,9 @@ data class Movie constructor(
     var genre_ids: List<Int?>?=null
     @Expose(serialize = false, deserialize = false)
     var indexInResponse: Int = -1
+
+//    @Expose(serialize = false, deserialize = false)
+//    var timeStamp:Long?=null
 
     @PrimaryKey(autoGenerate = true)
     @Expose(serialize = false, deserialize = false)

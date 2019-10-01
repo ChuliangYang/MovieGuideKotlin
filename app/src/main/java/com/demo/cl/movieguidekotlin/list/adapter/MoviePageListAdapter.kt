@@ -19,7 +19,7 @@ import com.demo.cl.movieguidekotlin.viewmodel.MovieViewModel
 
 class MoviePageListAdapter(val viewModel:MovieViewModel):PagedListAdapter<Movie,ViewBindingHolder>(object : DiffUtil.ItemCallback<Movie?>() {
     override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-        return oldItem.id==newItem.id
+        return oldItem.primaryId==newItem.primaryId
     }
 
     override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
@@ -38,7 +38,7 @@ class MoviePageListAdapter(val viewModel:MovieViewModel):PagedListAdapter<Movie,
         Log.e("bind","${position}")
         if(holder.dataBinding is ItemProgressBarBinding){
             holder.setData(BR.viewModel,viewModel)
-            holder.dataBinding.lifecycleOwner=holder.itemView.context as LifecycleOwner
+//            holder.dataBinding.lifecycleOwner=holder.itemView.context as LifecycleOwner
         }else if(holder.dataBinding is ItemMovieBinding){
             holder.setData(BR.movie,getItem(position))
         }
@@ -53,7 +53,8 @@ class MoviePageListAdapter(val viewModel:MovieViewModel):PagedListAdapter<Movie,
     }
 
     override fun getItemCount(): Int {
-        return (currentList?.size?:0) + 1
+//        return (currentList?.size?:0) + 1
+        return (currentList?.size?:0)
     }
 }
 

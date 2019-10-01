@@ -17,16 +17,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-
-//        Completable.fromAction {
-//            deleteDatabase("MovieDatabase")
-//            MovieDatabase.getInstance(baseContext).clearAllTables()
-//        }.subscribeOn(Schedulers.io()).subscribe()
-
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_content,MovieFragment.newInstance())
-            commit()
+        Completable.fromAction {
+            deleteDatabase("MovieDatabase")
+            MovieDatabase.getInstance(baseContext).clearAllTables()
+        }.subscribeOn(Schedulers.io()).subscribe {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fl_content,MovieFragment.newInstance())
+                commit()
+            }
         }
+
+
+
 
     }
 }
