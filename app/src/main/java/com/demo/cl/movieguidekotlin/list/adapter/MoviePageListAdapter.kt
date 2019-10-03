@@ -19,7 +19,7 @@ import com.demo.cl.movieguidekotlin.viewmodel.MovieViewModel
 
 class MoviePageListAdapter(val viewModel:MovieViewModel):PagedListAdapter<Movie,ViewBindingHolder>(object : DiffUtil.ItemCallback<Movie?>() {
     override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-        return oldItem.primaryId==newItem.primaryId
+        return oldItem==newItem
     }
 
     override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {

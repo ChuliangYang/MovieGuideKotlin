@@ -76,7 +76,7 @@ class MovieSourceBoundaryCallback(
         return { callback ->
             Log.e("insertCurrentPageIntoDB", "start fetch from api, currentpage=${currentPage}")
             movieApi.getMovieList(category.value, API_KEY, currentPage)
-                .subscribeOn(Schedulers.single())
+                .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
                 .map { response ->
                     val nextIndex = movieDao.getNextIndex(category.value)
@@ -84,7 +84,7 @@ class MovieSourceBoundaryCallback(
                         "insertCurrentPageIntoDB",
                         "get response from api start map, nextIndex=${nextIndex},chunkId=${response.results!![0].id}"
                     )
-                    response.results?.mapIndexed { index, movie ->
+                   return@map response.results?.mapIndexed { index, movie ->
                         movie.category = category.value
                         movie.indexInResponse = nextIndex + index
                         movie
